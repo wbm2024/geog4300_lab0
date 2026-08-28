@@ -37,13 +37,13 @@ You can load the tornado data (`noaa_stormevent_tornado_2026_08.csv` in the fold
 ```{r}
 #| label: Task1
 
-read_csv(noaa_stormevent_tornado_2026_08.csv)
-read_csv(data/SVI_2022_US_county.csv)
+tornadoes <- read_csv("data/stormevents/noaa_stormevent_tornado_2026_08.csv")
+svi <- read_csv("data/SVI_2022_US_county.csv")
 ```
 
 **Task 2:** *Pick two variables from either dataset that use different levels of measurement (nominal, ordinal, interval or ratio). Explain which level best describes each variable and why. Also identify one variable that would be more efficiently read as a factor, and explain why.*
 
-{Your explanation goes here.}
+{In the tornado dataset, the "STATE" column is Nominal data because it is just the name of the state the tornado occurred in. It can't be ranked, put in order, or multipled/divided. Also in the tornado dataset, the "DEATHS_DIRECT" dataset is ratio data, because the amount has a definite 0, and a value can be multiplies (50 deaths is double 25 deaths). An extra one is the "MAGNITUDE" column, which is the tornado rating, would be Ordinal data since it rated 0 through 5, but 4 isn't twice as strong as 2.}
 
 ## Filtering and/or summarizing the data
 
@@ -100,8 +100,8 @@ Next you'll need to join these tornado counts to SVI population data using the `
 **NOTE:** You may need to change the name of the population data below to match the object you used for the SVI data.
 
 ```{r}
-svi <- svi %>%
-  rename(cty_fips = FIPS)
+#svi <- svi %>%
+#  rename(cty_fips = FIPS)
 ```
 
 Call the function above to rename your data. Now you're ready to join the data.
