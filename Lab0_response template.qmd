@@ -12,7 +12,7 @@ execute:
 library(tidyverse)
 ```
 
-*Your name: {Your name here}*
+*Your name: {William Burgett-Merkel}*
 
 This "lab" assignment provides an opportunity to learn the basic mechanics of Github classroom, loading data, and doing some basic data manipulation using the tools in the tidyverse. Through this lab, you will identify counties with the highest levels of social vulnerability that also had high numbers of severe tornadoes (rated F3 and higher) during this study period.
 
@@ -37,7 +37,8 @@ You can load the tornado data (`noaa_stormevent_tornado_2026_08.csv` in the fold
 ```{r}
 #| label: Task1
 
-# Your code goes here.
+read_csv(noaa_stormevent_tornado_2026_08.csv)
+read_csv(data/SVI_2022_US_county.csv)
 ```
 
 **Task 2:** *Pick two variables from either dataset that use different levels of measurement (nominal, ordinal, interval or ratio). Explain which level best describes each variable and why. Also identify one variable that would be more efficiently read as a factor, and explain why.*
