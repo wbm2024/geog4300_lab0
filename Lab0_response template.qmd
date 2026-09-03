@@ -80,7 +80,8 @@ Filter the data below.
 ```{r}
 #| label: Task4
 
-# Your code goes here.
+Pop_Above_25k<-svi %>%
+  filter(E_TOTPOP)
 ```
 
 Let's add one more filter based on social vulnerability. When you look at the documentation there are a number of "dummy" variables (0/1) that flag counties that are at or above the 90th percentile for a number of factors. For example, `F_DISABL` flags counties in the top 10% for percentage of persons with a disability. There are also cumulative flags: `F_THEME2` sums all the flagged variables within the "Household Characteristics" category.
