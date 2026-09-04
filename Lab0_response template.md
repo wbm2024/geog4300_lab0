@@ -117,8 +117,20 @@ To do so, you’ll need to:
 higher and then count the number of events by county and state.*
 
 ``` r
-# Your code goes here.
+tornadoes_F3_plus<-tornadoes %>%
+  filter(TOR_F_SCALE=="F3" | TOR_F_SCALE=="F4" | TOR_F_SCALE=="F5" | TOR_F_SCALE=="EF3" | TOR_F_SCALE=="EF4" | TOR_F_SCALE=="EF5")
+  
+County_and_State<-tornadoes_F3_plus %>%
+  group_by(STATE_FIPS, STATE, cty_fips, CZ_NAME) %>%
+   summarise(count=n())
 ```
+
+    `summarise()` has regrouped the output.
+    ℹ Summaries were computed grouped by STATE_FIPS, STATE, cty_fips, and CZ_NAME.
+    ℹ Output is grouped by STATE_FIPS, STATE, and cty_fips.
+    ℹ Use `summarise(.groups = "drop_last")` to silence this message.
+    ℹ Use `summarise(.by = c(STATE_FIPS, STATE, cty_fips, CZ_NAME))` for
+      per-operation grouping (`?dplyr::dplyr_by`) instead.
 
 You also want to filter the social vulnerability data so that it only
 includes counties with a population over 25,000 people. This allows us
@@ -133,7 +145,8 @@ Filter the data below.
 of 25,000 or more.*
 
 ``` r
-# Your code goes here.
+Pop_Above_25k<-svi %>%
+  filter(E_TOTPOP > 25000)
 ```
 
 Let’s add one more filter based on social vulnerability. When you look
@@ -158,6 +171,7 @@ picked a numeric cutoff.
 explain your decision.*
 
 ``` r
+#Use F_MOBILE which is 90th percentile for mobile homes
 # Your code goes here.
 ```
 
