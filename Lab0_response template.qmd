@@ -129,13 +129,23 @@ Tornadoes_Vulnerable_Counties<-Vulnerable_Pop_Above_25k |>
 
 **Task 7:** *Find some documentation on the `inner_join()` function online or using help in R. Describe how it works, and explain how the results would have been different if you used `full_join()` instead.*
 
-{Write your response here.}
+```{r}
+?inner_join
+```
+
+
+{Inner joins take the data within the rows in dataset A and join them to the data in rows from  dataset B. Any matching data from dataset A will be kept, and anything that does not have a matching value in dataset B will be dropped from the join and not transferred. In a full join, everything from both dataset A and B, even if there is not matching data, is joined, with the unmatched data from dataset B still attached to the joined dataset.}
 
 ## Answering your research question
 
 **Task 8:** *Open up your joined dataset. Which three vulnerable counties have the highest number of severe tornadoes and how many were in each? Are there cities or other notable geographic features located in these counties?*
 
-{Write your response here.}
+```{r}
+Tornado_Vulnerable_Counties_Count<-Tornadoes_Vulnerable_Counties %>%
+  count(LOCATION)
+```
+
+{Walker County, Alabama had the most with 11 total F/EF-3+ Tornadoes. De Soto Parish, Louisiana has the 2nd most with 9 total F/EF-3+ tornadoes. Copiah County, Mississippi had the 3rd most tornadoes with 7 F/EF-3+ rated tornadoes. Walker County, Alabama does not have any major cities, but Jasper, the largest town in the county, hasover 14,500 people. Walker County is also close to Birmingham, AL. De Soto Parish, LA also does not have a major city, with Mansfield, LA being the most populated at just under 5,000 people. It is, however, close to Shreveport, LA. Lastly, Copiah County, Mississippi also does not have a major city within it, with their largest towns both under 5,000 people each. It does follow the trend of the previous 2 counties in the sense that it is located close to a major city, in this case Jackson, MS.}
 
 ## Challenge question
 
