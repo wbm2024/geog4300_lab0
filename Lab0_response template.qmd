@@ -12,7 +12,7 @@ execute:
 library(tidyverse)
 ```
 
-*Your name: {William Burgett-Merkel}*
+*Your name: William Burgett-Merkel*
 
 This "lab" assignment provides an opportunity to learn the basic mechanics of Github classroom, loading data, and doing some basic data manipulation using the tools in the tidyverse. Through this lab, you will identify counties with the highest levels of social vulnerability that also had high numbers of severe tornadoes (rated F3 and higher) during this study period.
 
@@ -43,7 +43,8 @@ svi <- read_csv("data/SVI_2022_US_county.csv")
 
 **Task 2:** *Pick two variables from either dataset that use different levels of measurement (nominal, ordinal, interval or ratio). Explain which level best describes each variable and why. Also identify one variable that would be more efficiently read as a factor, and explain why.*
 
-{In the tornado dataset, the "STATE" column is Nominal data because it is just the name of the state the tornado occurred in. It can't be ranked, put in order, or multipled/divided. Also in the tornado dataset, the "DEATHS_DIRECT" dataset is ratio data, because the amount has a definite 0, and a value can be multiplies (50 deaths is double 25 deaths). An extra one is the "MAGNITUDE" column, which is the tornado rating, would be Ordinal data since it rated 0 through 5, but 4 isn't twice as strong as 2.}
+
+In the tornado dataset, the "STATE" column is Nominal data because it is just the name of the state the tornado occurred in. It can't be ranked, put in order, or multiplied/divided. Also in the tornado dataset, the "DEATHS_DIRECT" dataset is ratio data, because the amount has a definite 0, and a value can be multiplies (50 deaths is double 25 deaths). The TOR_F_SCALE, which is the tornado rating, would be ordinal data since it rated 0 through 5, but 4 isn't twice as strong as 2. Since it can be ranked though, I think that data could be better served as a factor. I think this because it has finite levels, ranging from F (or EF) 0, to F/EF-5.
 
 ## Filtering and/or summarizing the data
 
@@ -68,7 +69,6 @@ tornadoes_F3_plus<-tornadoes %>%
 County_and_State<-tornadoes_F3_plus %>%
   group_by(STATE_FIPS, STATE, cty_fips, CZ_NAME) %>%
    summarise(count=n())
-
 ```
 
 You also want to filter the social vulnerability data so that it only includes counties with a population over 25,000 people. This allows us to only track counties with a moderate or large population. Use the SVI Documentation pdf in the data folder to determine which variable this is, recognizing that you want the **estimate** and not the margin of error (MOE).
@@ -134,7 +134,7 @@ Tornadoes_Vulnerable_Counties<-Vulnerable_Pop_Above_25k |>
 ```
 
 
-{Inner joins take the data within the rows in dataset A and join them to the data in rows from  dataset B. Any matching data from dataset A will be kept, and anything that does not have a matching value in dataset B will be dropped from the join and not transferred. In a full join, everything from both dataset A and B, even if there is not matching data, is joined, with the unmatched data from dataset B still attached to the joined dataset.}
+Inner joins take the data within the rows in dataset A and join them to the data in rows from  dataset B. Any matching data from dataset A will be kept, and anything that does not have a matching value in dataset B will be dropped from the join and not transferred. In a full join, everything from both dataset A and B, even if there is not matching data, is joined, with the unmatched data from dataset B still attached to the joined dataset.
 
 ## Answering your research question
 
@@ -145,22 +145,29 @@ Tornado_Vulnerable_Counties_Count<-Tornadoes_Vulnerable_Counties %>%
   count(LOCATION)
 ```
 
-{Walker County, Alabama had the most with 11 total F/EF-3+ Tornadoes. De Soto Parish, Louisiana has the 2nd most with 9 total F/EF-3+ tornadoes. Copiah County, Mississippi had the 3rd most tornadoes with 7 F/EF-3+ rated tornadoes. Walker County, Alabama does not have any major cities, but Jasper, the largest town in the county, hasover 14,500 people. Walker County is also close to Birmingham, AL. De Soto Parish, LA also does not have a major city, with Mansfield, LA being the most populated at just under 5,000 people. It is, however, close to Shreveport, LA. Lastly, Copiah County, Mississippi also does not have a major city within it, with their largest towns both under 5,000 people each. It does follow the trend of the previous 2 counties in the sense that it is located close to a major city, in this case Jackson, MS.}
+Walker County, Alabama had the most with 11 total F/EF-3+ Tornadoes. De Soto Parish, Louisiana has the 2nd most with 9 total F/EF-3+ tornadoes. Copiah County, Mississippi had the 3rd most tornadoes with 7 F/EF-3+ rated tornadoes. Walker County, Alabama does not have any major cities, but Jasper, the largest town in the county, hasover 14,500 people. Walker County is also close to Birmingham, AL. De Soto Parish, LA also does not have a major city, with Mansfield, LA being the most populated at just under 5,000 people. It is, however, close to Shreveport, LA. Lastly, Copiah County, Mississippi also does not have a major city within it, with their largest towns both under 5,000 people each. It does follow the trend of the previous 2 counties in the sense that it is located close to a major city, in this case Jackson, MS.
 
 ## Challenge question
 
 Find a peer-reviewed article published in the last ten years that uses this NWS/NOAA tornado dataset. What research question was it trying to answer? What methods were used? What are the most notable findings? Give the full citation and a summary of at least 100 words below.
 
-Write your response here.
+Paper: 
+Assessing United States County-Level Exposure for Research on Tropical Cyclones and Human Health
+
+Citation: 
+Anderson, G. B., Ferreri, J., Al-Hamdan, M., Crosson, W., Schumacher, A., Guikema, S., Quiring, S., Eddelbuettel, D., Yan, M., & Peng, R. D. (2020). Assessing United States County-Level Exposure for Research on Tropical   Cyclones and Human Health. Environmental health perspectives, 128(10), 107009. https://doi.org/10.1289/EHP6976
+
+Response to challenge question:
+The study aimed to answer questions regarding how hazards associated with tropical cyclones, those being wind, rain, flood, and tornadoes, impacted the United States exposure at a county level. The data used included the NOAA Storm Events Database and HURDAT for the tropical cyclone track, as well as R for the coding software. First the study defined that any tropical cyclone track within 250 km from a U.S. county would be considered, then they defined the distance away from the tropical cyclone center and timing range around the landfall for each hazard, which generally ended up being 500 km away and within 2 days of the tropical cyclone track's closest approach. Rain only varied from the timing methodology, as it was 2 days before and 1 day after the storms closest approach to properly account for rainfall. Wind also varied because HURDAT defines the area around the storm's center that received high winds of 34 knots or greater. Some notable results were that rain was the hazard that had the most exposed counties (both per year IQR and in single storm high count), while tornadoes had the least exposed counties. Another notable result is that hazards range from local issue to widespread problem. They show that tornadoes are mostly localized to a small number of counties, mostly in Florida, while rainfall impacts almost every county from Texas to Maine. 
 
 ## Final submission stuff
 
 **Disclosure of assistance:** Besides class materials, what other sources of assistance did you use while completing this lab? These can include input from classmates, relevant material identified through web searches (e.g., Stack Overflow), or assistance from ChatGPT or other AI tools. How did these sources support your own learning in completing this lab?
 
-Write your response here.
+I used Google and Bing to find out what errors meant, and if I was missing any key characters like pipes, which I forget frequently. These tools guided me so that I was not scrolling my code for hours trying to find an error that was minimal and just part of the learning curve of using a new software. Furthermore, error outputs can be confusing, so explanations on what they meant in simple terms helped me solve my coding errors quicker.
 
 **Lab reflection:** How do you feel about the work you did on this lab? Was it easy, moderate, or hard? What are the biggest things you learned by completing it?
 
-Write your response here.
+In general, it was pretty easy. I did forget the pipes enough to cause slowdowns but I think as I learn this software more I will get better at it. I learned about the basics of data wrangling in R, and how it can simplify efficiently handle large datasets.
 
 That's it! When you're done with this lab, use the Render command in Quarto to create a GitHub markdown document. Then push it to GitHub using the procedure outlined in this week's videos.
